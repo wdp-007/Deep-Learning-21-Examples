@@ -302,17 +302,17 @@ def detect_face(img, minsize, pnet, rnet, onet, threshold, factor):
     # threshold: threshold=[th1 th2 th3], th1-3 are three steps's threshold
     # fastresize: resize img from last scale (using in high-resolution images) if fastresize==true
     factor_count=0
-    total_boxes=np.empty((0,9))
+    total_boxes=np.empty((0,9))  # shape:(0,9)
     points=[]
-    h=img.shape[0]
-    w=img.shape[1]
-    minl=np.amin([h, w])
-    m=12.0/minsize
-    minl=minl*m
+    h=img.shape[0]  # h=550 img = (550,371,3)
+    w=img.shape[1]  # w=371
+    minl=np.amin([h, w]) # 371
+    m=12.0/minsize       # minsize=20 m=0.6
+    minl=minl*m          # 222.6
     # creat scale pyramid
     scales=[]
     while minl>=12:
-        scales += [m*np.power(factor, factor_count)]
+        scales += [m*np.power(factor, factor_count)]   # factor=0.709
         minl = minl*factor
         factor_count += 1
 
