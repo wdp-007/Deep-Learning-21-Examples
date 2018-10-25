@@ -65,6 +65,12 @@ TEST_RESULT_PATH = "test_images/result"
 # Size, in inches, of the output images.
 IMAGE_SIZE = (12, 8)
 
+def load_image_into_numpy_array(image):
+  (im_width, im_height) = image.size
+  return np.array(image.getdata()).reshape(
+      (im_height, im_width, 3)).astype(np.uint8)
+      
+
 with detection_graph.as_default():
   with tf.Session(graph=detection_graph) as sess:
     # Definite input and output Tensors for detection_graph
